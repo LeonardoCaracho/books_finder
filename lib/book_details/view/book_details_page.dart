@@ -1,7 +1,6 @@
-import 'package:books_finder/book_details/book_details.dart';
-import 'package:books_finder/shared/shared.dart';
-import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:books_finder/book_details/book_details.dart';
+import 'package:books_repository/books_repository.dart';
 
 class BookDetailsPage extends StatelessWidget {
   /// {@macro book_details_page}
@@ -43,20 +42,7 @@ class BookDetailsView extends StatelessWidget {
     return Center(
       child: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 240,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(book.title),
-              centerTitle: true,
-              background: Image.network(
-                book.thumbnail ?? AppConstants.placeholderDetails,
-                fit: BoxFit.cover,
-                color: Colors.white.withOpacity(0.5),
-                colorBlendMode: BlendMode.modulate,
-                alignment: Alignment.topCenter,
-              ),
-            ),
-          ),
+          BookDetailsAppBar(book: book),
           SliverList(
             delegate: SliverChildListDelegate([
               BookDetailsBody(

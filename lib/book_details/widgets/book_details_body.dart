@@ -18,28 +18,46 @@ class BookDetailsBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            book.publisher,
+            "Author(s): ${book.authors.join(', ')}",
+            style: Theme.of(context).textTheme.labelSmall,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            "Publisher: ${book.publisher}",
             style: Theme.of(context).textTheme.labelSmall,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 16,
             ),
-            child: Text(book.description),
+            child: Text(
+              book.description,
+              textAlign: TextAlign.justify,
+            ),
           ),
-          Wrap(
-            spacing: 5,
-            children: book.authors
-                .map(
-                  (genre) => Chip(
-                    label: Text(
-                      genre,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                  ),
-                )
-                .toList(),
+          Row(
+            children: [
+              Text(
+                "Categories: ",
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              Wrap(
+                spacing: 5,
+                children: book.categories
+                    .map(
+                      (genre) => Chip(
+                        label: Text(
+                          genre,
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
           ),
+          const SizedBox(height: 100)
         ],
       ),
     );
