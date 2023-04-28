@@ -1,63 +1,27 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:books_finder/favorites/favorites.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:books_finder/favorites/cubit/cubit.dart';
+import 'package:books_finder/shared/shared.dart';
 
 void main() {
   group('FavoritesState', () {
-    test('supports value equality', () {
+    test('supports value comparison', () {
       expect(
-        FavoritesState(),
-        equals(
-          const FavoritesState(),
-        ),
+        const FavoritesState(status: Status.initial, books: []),
+        const FavoritesState(status: Status.initial, books: []),
       );
     });
 
-    group('constructor', () {
-      test('can be instantiated', () {
-        expect(
-          const FavoritesState(),
-          isNotNull,
-        );
-      });
-    });
-
-    group('copyWith', () {
-      test(
-        'copies correctly '
-        'when no argument specified',
-        () {
-          const favoritesState = FavoritesState(
-            customProperty: 'My property',
-          );
-          expect(
-            favoritesState.copyWith(),
-            equals(favoritesState),
-          );
-        },
+    test('copyWith comparisons are correct', () {
+      const oldState = FavoritesState(
+        status: Status.success,
+        books: [],
       );
 
-      test(
-        'copies correctly '
-        'when all arguments specified',
-        () {
-          const favoritesState = FavoritesState(
-            customProperty: 'My property',
-          );
-          final otherFavoritesState = FavoritesState(
-            customProperty: 'My property 2',
-          );
-          expect(favoritesState, isNot(equals(otherFavoritesState)));
+      final newState = oldState.copyWith(status: Status.loading);
 
-          expect(
-            favoritesState.copyWith(
-              customProperty: otherFavoritesState.customProperty,
-            ),
-            equals(otherFavoritesState),
-          );
-        },
-      );
+      expect(oldState != newState, true);
+      expect(newState.status, Status.loading);
+      expect(newState.books, oldState.books);
     });
   });
 }

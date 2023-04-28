@@ -1,63 +1,25 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:books_finder/book_details/book_details.dart';
+import 'package:books_finder/shared/shared.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:books_finder/book_details/cubit/cubit.dart';
 
 void main() {
   group('BookDetailsState', () {
-    test('supports value equality', () {
+    test('supports value comparison', () {
       expect(
-        BookDetailsState(),
-        equals(
-          const BookDetailsState(),
-        ),
+        const BookDetailsState(),
+        const BookDetailsState(),
+      );
+      expect(
+        const BookDetailsState(status: Status.loading),
+        const BookDetailsState(status: Status.loading),
       );
     });
 
-    group('constructor', () {
-      test('can be instantiated', () {
-        expect(
-          const BookDetailsState(),
-          isNotNull,
-        );
-      });
-    });
+    test('copies with new values', () {
+      const original = BookDetailsState(status: Status.initial);
+      final copy = original.copyWith(status: Status.loading);
 
-    group('copyWith', () {
-      test(
-        'copies correctly '
-        'when no argument specified',
-        () {
-          const bookDetailsState = BookDetailsState(
-            customProperty: 'My property',
-          );
-          expect(
-            bookDetailsState.copyWith(),
-            equals(bookDetailsState),
-          );
-        },
-      );
-
-      test(
-        'copies correctly '
-        'when all arguments specified',
-        () {
-          const bookDetailsState = BookDetailsState(
-            customProperty: 'My property',
-          );
-          final otherBookDetailsState = BookDetailsState(
-            customProperty: 'My property 2',
-          );
-          expect(bookDetailsState, isNot(equals(otherBookDetailsState)));
-
-          expect(
-            bookDetailsState.copyWith(
-              customProperty: otherBookDetailsState.customProperty,
-            ),
-            equals(otherBookDetailsState),
-          );
-        },
-      );
+      expect(copy.status, Status.loading);
     });
   });
 }
