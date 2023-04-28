@@ -7,12 +7,16 @@ class BooksSearchBody extends StatelessWidget {
   /// {@macro books_search_body}
   const BooksSearchBody({super.key});
 
-  void _showToast(BuildContext context, String text) {
+  void _showToast(
+    BuildContext context,
+    String text, {
+    Color color = Colors.green,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(text),
         duration: const Duration(seconds: 2),
-        backgroundColor: Colors.grey[600],
+        backgroundColor: color.withOpacity(0.8),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -23,7 +27,11 @@ class BooksSearchBody extends StatelessWidget {
     return BlocListener<FavoritesCubit, FavoritesState>(
       listener: (context, state) {
         if (state.status.isFailure) {
-          _showToast(context, "Add to favorites failed!");
+          _showToast(
+            context,
+            "Add to favorites failed!",
+            color: Colors.red,
+          );
         }
 
         if (state.status.isSuccess) {
@@ -35,41 +43,42 @@ class BooksSearchBody extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              TextField(
-                onSubmitted: (text) {
-                  context.read<BooksSearchBloc>().add(
-                        BooksSearchEvent(
-                          query: text,
-                        ),
-                      );
-                },
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.search),
-                  hintText: 'Search',
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 20,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
+              const BooksSearchWidget(),
               Expanded(
                 child: BlocBuilder<BooksSearchBloc, BooksSearchState>(
                   builder: (context, state) {
                     if (state is BooksSearchIsLoadSuccess) {
+                      if (state.books.isEmpty) {
+                        return const BooksEmptyState(
+                          text: "We couldn't find any books :(\n Try a different search!",
+                        );
+                      }
+
                       return ListView.builder(
                         itemCount: state.books.length,
-                        itemBuilder: (context, index) => SearchResultListTile(
-                          book: state.books[index],
-                        ),
+                        itemBuilder: (context, index) {
+                          final book = state.books[index];
+                          return BookListTile(
+                            book: book,
+                            trailIcon: const Icon(
+                              Icons.favorite,
+                              color: Colors.lightBlue,
+                            ),
+                            trailAction: () => context.read<FavoritesCubit>().addFavorite(book),
+                          );
+                        },
                       );
                     }
 
                     if (state is BooksSearchIsLoading) {
                       return const Center(
                         child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (state is BooksSearchInitial) {
+                      return const BooksEmptyState(
+                        text: "Use the Search bar above to find \nyour favorites books!",
                       );
                     }
 
