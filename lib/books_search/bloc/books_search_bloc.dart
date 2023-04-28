@@ -1,19 +1,32 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:books_repository/books_repository.dart';
 import 'package:equatable/equatable.dart';
 part 'books_search_event.dart';
 part 'books_search_state.dart';
 
 class BooksSearchBloc extends Bloc<BooksSearchEvent, BooksSearchState> {
-  BooksSearchBloc() : super(const BooksSearchInitial()) {
-    on<CustomBooksSearchEvent>(_onCustomBooksSearchEvent);
+  BooksSearchBloc({
+    required this.booksRepository,
+  }) : super(BooksSearchInitial()) {
+    on<BooksSearchEvent>(_onBooksSearchEvent);
   }
 
-  FutureOr<void> _onCustomBooksSearchEvent(
-    CustomBooksSearchEvent event,
+  final BooksRepository booksRepository;
+
+  FutureOr<void> _onBooksSearchEvent(
+    BooksSearchEvent event,
     Emitter<BooksSearchState> emit,
-  ) {
-    // TODO: Add Logic
+  ) async {
+    try {
+      emit(BooksSearchIsLoading());
+
+      final books = await booksRepository.getBooksBySearch(event.query);
+
+      emit(BooksSearchIsLoadSuccess(books: books));
+    } catch (e) {
+      emit(BooksSearchIsFailure());
+    }
   }
 }

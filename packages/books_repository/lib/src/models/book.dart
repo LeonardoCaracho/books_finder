@@ -7,7 +7,6 @@ part 'book.g.dart';
 class Book {
   Book({
     required this.id,
-    required this.thumbnail,
     required this.title,
     required this.authors,
     required this.categories,
@@ -15,6 +14,7 @@ class Book {
     required this.pageCount,
     required this.publishedDate,
     required this.publisher,
+    this.thumbnail,
     this.buyLink,
   });
 
@@ -26,12 +26,12 @@ class Book {
   final String description;
   final int pageCount;
   final List<String> categories;
-  final String thumbnail;
+  final String? thumbnail;
   final String? buyLink;
 
   factory Book.fromApi(api.Book book) => Book(
         id: book.id,
-        thumbnail: book.volumeInfo.imageLinks.thumbnail,
+        thumbnail: book.volumeInfo.imageLinks?.thumbnail,
         title: book.volumeInfo.title ?? "",
         authors: book.volumeInfo.authors ?? [],
         categories: book.volumeInfo.categories ?? [],
@@ -39,7 +39,7 @@ class Book {
         pageCount: book.volumeInfo.pageCount ?? 0,
         publishedDate: book.volumeInfo.publishedDate ?? "",
         publisher: book.volumeInfo.publisher ?? "",
-        buyLink: book.salesInfo.buyLink,
+        buyLink: book.salesInfo?.buyLink,
       );
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);

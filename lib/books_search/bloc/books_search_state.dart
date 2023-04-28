@@ -1,34 +1,20 @@
 part of 'books_search_bloc.dart';
 
-/// {@template books_search_state}
-/// BooksSearchState description
-/// {@endtemplate}
 class BooksSearchState extends Equatable {
-  /// {@macro books_search_state}
-  const BooksSearchState({
-    this.customProperty = 'Default Value',
+  @override
+  List<Object> get props => [];
+}
+
+class BooksSearchInitial extends BooksSearchState {}
+
+class BooksSearchIsLoading extends BooksSearchState {}
+
+class BooksSearchIsLoadSuccess extends BooksSearchState {
+  BooksSearchIsLoadSuccess({
+    required this.books,
   });
 
-  /// A description for customProperty
-  final String customProperty;
-
-  @override
-  List<Object> get props => [customProperty];
-
-  /// Creates a copy of the current BooksSearchState with property changes
-  BooksSearchState copyWith({
-    String? customProperty,
-  }) {
-    return BooksSearchState(
-      customProperty: customProperty ?? this.customProperty,
-    );
-  }
+  final List<Book> books;
 }
 
-/// {@template books_search_initial}
-/// The initial state of BooksSearchState
-/// {@endtemplate}
-class BooksSearchInitial extends BooksSearchState {
-  /// {@macro books_search_initial}
-  const BooksSearchInitial() : super();
-}
+class BooksSearchIsFailure extends BooksSearchState {}

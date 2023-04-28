@@ -12,7 +12,7 @@ class Book {
 
   final String id;
   final VolumeInfo volumeInfo;
-  final SalesInfo salesInfo;
+  final SalesInfo? salesInfo;
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);
@@ -25,7 +25,7 @@ class VolumeInfo {
     this.authors,
     this.categories,
     this.description,
-    required this.imageLinks,
+    this.imageLinks,
     this.pageCount,
     this.publishedDate,
     this.publisher,
@@ -38,7 +38,7 @@ class VolumeInfo {
   final String? description;
   final int? pageCount;
   final List<String>? categories;
-  final ImageLinks imageLinks;
+  final ImageLinks? imageLinks;
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) => _$VolumeInfoFromJson(json);
   Map<String, dynamic> toJson() => _$VolumeInfoToJson(this);
@@ -47,10 +47,10 @@ class VolumeInfo {
 @JsonSerializable()
 class ImageLinks {
   ImageLinks({
-    required this.thumbnail,
+    this.thumbnail,
   });
 
-  final String thumbnail;
+  final String? thumbnail;
 
   factory ImageLinks.fromJson(Map<String, dynamic> json) => _$ImageLinksFromJson(json);
   Map<String, dynamic> toJson() => _$ImageLinksToJson(this);

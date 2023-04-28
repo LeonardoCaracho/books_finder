@@ -1,39 +1,72 @@
+import 'package:books_finder/book_details/book_details.dart';
+import 'package:books_finder/shared/shared.dart';
+import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:books_finder/book_details/cubit/cubit.dart';
-import 'package:books_finder/book_details/widgets/book_details_body.dart';
 
-/// {@template book_details_page}
-/// A description for BookDetailsPage
-/// {@endtemplate}
 class BookDetailsPage extends StatelessWidget {
   /// {@macro book_details_page}
-  const BookDetailsPage({super.key});
+  const BookDetailsPage({
+    super.key,
+    required this.book,
+  });
+
+  final Book book;
 
   /// The static route for BookDetailsPage
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const BookDetailsPage());
+  static Route<dynamic> route(Book book) {
+    return MaterialPageRoute<dynamic>(builder: (_) => BookDetailsPage(book: book));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BookDetailsCubit(),
-      child: const Scaffold(
-        body: BookDetailsView(),
+      child: Scaffold(
+        body: BookDetailsView(book: book),
+        bottomSheet: BookDetailsBottom(
+          book: book,
+        ),
       ),
     );
-  }    
+  }
 }
 
-/// {@template book_details_view}
-/// Displays the Body of BookDetailsView
-/// {@endtemplate}
 class BookDetailsView extends StatelessWidget {
-  /// {@macro book_details_view}
-  const BookDetailsView({super.key});
+  const BookDetailsView({
+    super.key,
+    required this.book,
+  });
+
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
-    return const BookDetailsBody();
+    return Center(
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 240,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(book.title),
+              centerTitle: true,
+              background: Image.network(
+                book.thumbnail ?? AppConstants.placeholderDetails,
+                fit: BoxFit.cover,
+                color: Colors.white.withOpacity(0.5),
+                colorBlendMode: BlendMode.modulate,
+                alignment: Alignment.topCenter,
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              BookDetailsBody(
+                book: book,
+              ),
+            ]),
+          ),
+        ],
+      ),
+    );
   }
 }

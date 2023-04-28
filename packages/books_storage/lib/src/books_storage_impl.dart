@@ -4,8 +4,8 @@ import 'package:books_repository/books_repository.dart';
 import 'package:books_storage/books_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BookStorageImpl extends BooksStorage {
-  BookStorageImpl({
+class BooksStorageImpl extends BooksStorage {
+  BooksStorageImpl({
     required SharedPreferences plugin,
   }) : _plugin = plugin;
 

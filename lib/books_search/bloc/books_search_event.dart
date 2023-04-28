@@ -1,18 +1,12 @@
 part of 'books_search_bloc.dart';
 
-abstract class BooksSearchEvent  extends Equatable {
-  const BooksSearchEvent();
-}
+class BooksSearchEvent extends Equatable {
+  const BooksSearchEvent({
+    required this.query,
+  });
 
-/// {@template custom_books_search_event}
-/// Event added when some custom logic happens
-/// {@endtemplate}
-class CustomBooksSearchEvent extends BooksSearchEvent {
-  /// {@macro custom_books_search_event}
-  const CustomBooksSearchEvent();
-
+  final String query;
 
   @override
-  List<Object> get props => [];
-
+  List<Object?> get props => [query];
 }
