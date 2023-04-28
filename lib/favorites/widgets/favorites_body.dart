@@ -12,8 +12,13 @@ class FavoritesBody extends StatelessWidget {
         if (state.status.isSuccess) {
           return ListView.builder(
             itemCount: state.books.length,
-            itemBuilder: (context, index) => FavoritesListTile(
+            itemBuilder: (context, index) => BookListTile(
               book: state.books[index],
+              trailIcon: const Icon(
+                Icons.delete,
+                color: Colors.grey,
+              ),
+              trailAction: () => context.read<FavoritesCubit>().deleteFavorite(state.books[index]),
             ),
           );
         }

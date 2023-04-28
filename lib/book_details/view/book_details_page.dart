@@ -19,18 +19,13 @@ class BookDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BookDetailsCubit(
-        booksRepository: context.read<BooksRepositoryImpl>(),
-      ),
-      child: Scaffold(
-        body: BookDetailsView(book: book),
-        bottomSheet: book.buyLink != null
-            ? BookDetailsBottom(
-                url: book.buyLink!,
-              )
-            : const SizedBox.shrink(),
-      ),
+    return Scaffold(
+      body: BookDetailsView(book: book),
+      bottomSheet: book.buyLink != null
+          ? BookDetailsBottom(
+              url: book.buyLink!,
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

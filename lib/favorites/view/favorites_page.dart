@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:books_finder/favorites/cubit/cubit.dart';
 import 'package:books_finder/favorites/widgets/favorites_body.dart';
 
-/// {@template favorites_page}
-/// A description for FavoritesPage
-/// {@endtemplate}
 class FavoritesPage extends StatelessWidget {
-  /// {@macro favorites_page}
   const FavoritesPage({super.key});
 
   /// The static route for FavoritesPage
@@ -32,11 +28,7 @@ class FavoritesPage extends StatelessWidget {
   }
 }
 
-/// {@template favorites_view}
-/// Displays the Body of FavoritesView
-/// {@endtemplate}
 class FavoritesView extends StatelessWidget {
-  /// {@macro favorites_view}
   const FavoritesView({super.key});
 
   @override

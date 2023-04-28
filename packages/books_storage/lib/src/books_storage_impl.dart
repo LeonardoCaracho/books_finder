@@ -31,6 +31,13 @@ class BooksStorageImpl extends BooksStorage {
   @override
   Future<void> saveBook(Book book) async {
     final books = getStoredBooks();
+
+    final bookExists = books.any((b) => b.id == book.id);
+
+    if (bookExists) {
+      throw Exception("Duplicated registry!");
+    }
+
     books.add(book);
 
     await _updateStorage(books);
