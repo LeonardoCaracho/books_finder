@@ -1,14 +1,32 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:books_finder/shared/shared.dart';
+import 'package:books_repository/books_repository.dart';
 import 'package:equatable/equatable.dart';
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
-  FavoritesCubit() : super(const FavoritesInitial());
+  FavoritesCubit({
+    required this.booksRepository,
+  }) : super(const FavoritesState());
 
-  /// A description for yourCustomFunction 
-  FutureOr<void> yourCustomFunction() {
-    // TODO: Add Logic
+  final BooksRepository booksRepository;
+
+  FutureOr<void> getFavorites() async {
+    try {
+      emit(state.copyWith(status: Status.loading));
+
+      final books = await booksRepository.getStoredBooks();
+
+      emit(
+        state.copyWith(
+          status: Status.success,
+          books: books,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: Status.failure));
+    }
   }
 }

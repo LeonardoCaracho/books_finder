@@ -1,3 +1,4 @@
+import 'package:books_finder/favorites/favorites.dart';
 import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:books_finder/books_search/bloc/bloc.dart';
@@ -17,8 +18,18 @@ class BooksSearchPage extends StatelessWidget {
       create: (context) => BooksSearchBloc(
         booksRepository: context.read<BooksRepositoryImpl>(),
       ),
-      child: const Scaffold(
-        body: BooksSearchView(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Books Finder"),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.of(context).push(FavoritesPage.route()),
+              icon: const Icon(Icons.favorite),
+            )
+          ],
+        ),
+        body: const BooksSearchView(),
       ),
     );
   }

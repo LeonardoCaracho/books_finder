@@ -19,7 +19,7 @@ class BooksRepositoryImpl extends BooksRepository {
 
   @override
   Future<List<Book>> getStoredBooks() async {
-    return await booksStorage.getStoredBooks();
+    return booksStorage.getStoredBooks();
   }
 
   @override

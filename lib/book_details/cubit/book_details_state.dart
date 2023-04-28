@@ -1,33 +1,21 @@
 part of 'book_details_cubit.dart';
 
-/// {@template book_details}
-/// BookDetailsState description
-/// {@endtemplate}
 class BookDetailsState extends Equatable {
   /// {@macro book_details}
   const BookDetailsState({
-    this.customProperty = 'Default Value',
+    this.status = Status.initial,
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final Status status;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [status];
 
-  /// Creates a copy of the current BookDetailsState with property changes
   BookDetailsState copyWith({
-    String? customProperty,
+    Status? status,
   }) {
     return BookDetailsState(
-      customProperty: customProperty ?? this.customProperty,
+      status: status ?? this.status,
     );
   }
-}
-/// {@template book_details_initial}
-/// The initial state of BookDetailsState
-/// {@endtemplate}
-class BookDetailsInitial extends BookDetailsState {
-  /// {@macro book_details_initial}
-  const BookDetailsInitial() : super();
 }

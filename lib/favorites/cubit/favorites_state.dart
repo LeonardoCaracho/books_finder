@@ -1,33 +1,25 @@
 part of 'favorites_cubit.dart';
 
-/// {@template favorites}
-/// FavoritesState description
-/// {@endtemplate}
 class FavoritesState extends Equatable {
   /// {@macro favorites}
   const FavoritesState({
-    this.customProperty = 'Default Value',
+    this.status = Status.initial,
+    this.books = const [],
   });
 
-  /// A description for customProperty
-  final String customProperty;
+  final Status status;
+  final List<Book> books;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [status, books];
 
-  /// Creates a copy of the current FavoritesState with property changes
   FavoritesState copyWith({
-    String? customProperty,
+    Status? status,
+    List<Book>? books,
   }) {
     return FavoritesState(
-      customProperty: customProperty ?? this.customProperty,
+      status: status ?? this.status,
+      books: books ?? this.books,
     );
   }
-}
-/// {@template favorites_initial}
-/// The initial state of FavoritesState
-/// {@endtemplate}
-class FavoritesInitial extends FavoritesState {
-  /// {@macro favorites_initial}
-  const FavoritesInitial() : super();
 }

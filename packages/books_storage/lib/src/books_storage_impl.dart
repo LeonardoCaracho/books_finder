@@ -14,25 +14,26 @@ class BooksStorageImpl extends BooksStorage {
   static const kBooksCollectionKey = '__books_collection_key__';
 
   @override
-  Future<List<Book>> getStoredBooks() async {
+  List<Book> getStoredBooks() {
     final booksString = _plugin.getString(kBooksCollectionKey) ?? '[]';
-    return json.decode(booksString).map((bookJson) => Book.fromJson(bookJson)).toList();
+    final booksDecoded = json.decode(booksString);
+    return booksDecoded.map((bookJson) => Book.fromJson(bookJson)).whereType<Book>().toList();
   }
 
   @override
   Future<void> deleteStoredBook(Book book) async {
-    final books = await getStoredBooks();
+    final books = getStoredBooks();
     books.remove(book);
 
-    _updateStorage(books);
+    await _updateStorage(books);
   }
 
   @override
   Future<void> saveBook(Book book) async {
-    final books = await getStoredBooks();
+    final books = getStoredBooks();
     books.add(book);
 
-    _updateStorage(books);
+    await _updateStorage(books);
   }
 
   Future<void> _updateStorage(List<Book> books) async {
