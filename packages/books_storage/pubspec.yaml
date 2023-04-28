@@ -7,8 +7,8 @@ environment:
   sdk: ">=2.18.7 <3.0.0"
 
 dependencies:
-  books_api:
-    path: ../books_api
+  books_repository:
+    path: ../books_repository
   shared_preferences: ^2.1.0
 
 dev_dependencies:

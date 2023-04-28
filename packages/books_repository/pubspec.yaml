@@ -1,13 +1,21 @@
 name: books_repository
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-# homepage: https://www.example.com
+publish_to: none
 
 environment:
-  sdk: '>=2.18.7 <3.0.0'
+  sdk: ">=2.18.7 <3.0.0"
 
-# dependencies:
-#   path: ^1.8.0
+dependencies:
+  books_api:
+    path: ../books_api
+  books_storage:
+    path: ../books_storage
+  build_runner: ^2.3.3
+  equatable: ^2.0.5
+  http: ^0.13.5
+  json_annotation: ^4.8.0
+  json_serializable: ^6.6.1
 
 dev_dependencies:
   lints: ^2.0.0

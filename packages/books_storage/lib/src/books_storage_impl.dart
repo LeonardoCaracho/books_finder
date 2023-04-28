@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:books_api/books_api.dart';
+import 'package:books_repository/books_repository.dart';
 import 'package:books_storage/books_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
