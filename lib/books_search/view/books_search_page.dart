@@ -14,10 +14,19 @@ class BooksSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BooksSearchBloc(
-        booksRepository: context.read<BooksRepositoryImpl>(),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BooksSearchBloc(
+            booksRepository: context.read<BooksRepositoryImpl>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => FavoritesCubit(
+            booksRepository: context.read<BooksRepositoryImpl>(),
+          ),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Books Finder"),

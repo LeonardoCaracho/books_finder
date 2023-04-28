@@ -1,10 +1,11 @@
 import 'package:books_api/books_api.dart' as api;
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book.g.dart';
 
 @JsonSerializable()
-class Book {
+class Book extends Equatable {
   Book({
     required this.id,
     required this.title,
@@ -39,9 +40,23 @@ class Book {
         pageCount: book.volumeInfo.pageCount ?? 0,
         publishedDate: book.volumeInfo.publishedDate ?? "",
         publisher: book.volumeInfo.publisher ?? "",
-        buyLink: book.salesInfo?.buyLink,
+        buyLink: book.saleInfo?.buyLink,
       );
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);
+
+  @override
+  List<Object?> get props => [
+        id,
+        thumbnail,
+        title,
+        authors,
+        categories,
+        description,
+        pageCount,
+        publishedDate,
+        publisher,
+        buyLink,
+      ];
 }

@@ -1,4 +1,5 @@
 import 'package:books_finder/book_details/book_details.dart';
+import 'package:books_finder/favorites/cubit/cubit.dart';
 import 'package:books_finder/shared/shared.dart';
 import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,12 @@ class SearchResultListTile extends StatelessWidget {
               ),
               title: Text(book.title),
               subtitle: Text(book.authors.join(' · ')),
+              trailing: IconButton(
+                icon: const Icon(Icons.favorite),
+                onPressed: () {
+                  context.read<FavoritesCubit>().addFavorite(book);
+                },
+              ),
             ),
           ),
         ],

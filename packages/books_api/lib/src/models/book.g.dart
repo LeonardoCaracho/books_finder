@@ -8,9 +8,9 @@ part of 'book.dart';
 
 Book _$BookFromJson(Map<String, dynamic> json) => Book(
       id: json['id'] as String,
-      salesInfo: json['salesInfo'] == null
+      saleInfo: json['saleInfo'] == null
           ? null
-          : SalesInfo.fromJson(json['salesInfo'] as Map<String, dynamic>),
+          : SaleInfo.fromJson(json['saleInfo'] as Map<String, dynamic>),
       volumeInfo:
           VolumeInfo.fromJson(json['volumeInfo'] as Map<String, dynamic>),
     );
@@ -18,7 +18,7 @@ Book _$BookFromJson(Map<String, dynamic> json) => Book(
 Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{
       'id': instance.id,
       'volumeInfo': instance.volumeInfo,
-      'salesInfo': instance.salesInfo,
+      'saleInfo': instance.saleInfo,
     };
 
 VolumeInfo _$VolumeInfoFromJson(Map<String, dynamic> json) => VolumeInfo(
@@ -58,10 +58,10 @@ Map<String, dynamic> _$ImageLinksToJson(ImageLinks instance) =>
       'thumbnail': instance.thumbnail,
     };
 
-SalesInfo _$SalesInfoFromJson(Map<String, dynamic> json) => SalesInfo(
+SaleInfo _$SaleInfoFromJson(Map<String, dynamic> json) => SaleInfo(
       buyLink: json['buyLink'] as String?,
     );
 
-Map<String, dynamic> _$SalesInfoToJson(SalesInfo instance) => <String, dynamic>{
+Map<String, dynamic> _$SaleInfoToJson(SaleInfo instance) => <String, dynamic>{
       'buyLink': instance.buyLink,
     };

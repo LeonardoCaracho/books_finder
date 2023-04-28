@@ -1,4 +1,5 @@
 import 'package:books_finder/book_details/book_details.dart';
+import 'package:books_finder/favorites/favorites.dart';
 import 'package:books_finder/shared/shared.dart';
 import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,12 @@ class FavoritesListTile extends StatelessWidget {
               ),
               title: Text(book.title),
               subtitle: Text(book.authors.join(' · ')),
+              trailing: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  context.read<FavoritesCubit>().deleteFavorite(book);
+                },
+              ),
             ),
           ),
         ],

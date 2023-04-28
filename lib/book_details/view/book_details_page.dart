@@ -25,9 +25,11 @@ class BookDetailsPage extends StatelessWidget {
       ),
       child: Scaffold(
         body: BookDetailsView(book: book),
-        bottomSheet: BookDetailsBottom(
-          book: book,
-        ),
+        bottomSheet: book.buyLink != null
+            ? BookDetailsBottom(
+                url: book.buyLink!,
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }

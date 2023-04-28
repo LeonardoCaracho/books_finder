@@ -29,4 +29,38 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       emit(state.copyWith(status: Status.failure));
     }
   }
+
+  FutureOr<void> addFavorite(Book book) async {
+    try {
+      emit(state.copyWith(status: Status.loading));
+
+      await booksRepository.saveBook(book);
+
+      emit(
+        state.copyWith(
+          status: Status.success,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: Status.failure));
+    }
+  }
+
+  FutureOr<void> deleteFavorite(Book book) async {
+    try {
+      emit(state.copyWith(status: Status.loading));
+
+      await booksRepository.deleteBook(book);
+      final books = await booksRepository.getStoredBooks();
+
+      emit(
+        state.copyWith(
+          status: Status.success,
+          books: books,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: Status.failure));
+    }
+  }
 }

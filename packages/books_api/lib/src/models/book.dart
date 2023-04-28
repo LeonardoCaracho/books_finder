@@ -6,13 +6,13 @@ part 'book.g.dart';
 class Book {
   Book({
     required this.id,
-    required this.salesInfo,
+    required this.saleInfo,
     required this.volumeInfo,
   });
 
   final String id;
   final VolumeInfo volumeInfo;
-  final SalesInfo? salesInfo;
+  final SaleInfo? saleInfo;
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);
@@ -57,13 +57,13 @@ class ImageLinks {
 }
 
 @JsonSerializable()
-class SalesInfo {
-  SalesInfo({
+class SaleInfo {
+  SaleInfo({
     this.buyLink,
   });
 
   final String? buyLink;
 
-  factory SalesInfo.fromJson(Map<String, dynamic> json) => _$SalesInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$SalesInfoToJson(this);
+  factory SaleInfo.fromJson(Map<String, dynamic> json) => _$SaleInfoFromJson(json);
+  Map<String, dynamic> toJson() => _$SaleInfoToJson(this);
 }
