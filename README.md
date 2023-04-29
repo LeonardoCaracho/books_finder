@@ -14,7 +14,7 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 $ flutter run --target lib/main.dart
 ```
 
-_\*The Books Finder works on iOS and Android.
+\*The Books Finder works on iOS and Android.\*
 
 ---
 
@@ -53,7 +53,7 @@ Widgets do not communicate directly with the repository.
   
 * **Data**
     - **Repository**: Abstract the data layer and expose domain models for the application to consume, facilitating the communication with the Bussiness Logic layer.
-    - **Data Provider**: The data provider is used to fetch raw data from the API.
+    - **Data Provider**: The data provider is used to fetch raw data from the API and to handle the local storage for the favorites feature.
 
 ## Supported Features
 
@@ -71,7 +71,7 @@ Widgets do not communicate directly with the repository.
 
 ## About the Google API
 
-The app fetchs data from the following endpoints:
+The app fetchs data from the following endpoint:
 
 - [Get Books by query](https://www.googleapis.com/books/v1/volumes?q=dune)
 
