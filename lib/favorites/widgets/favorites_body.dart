@@ -10,6 +10,12 @@ class FavoritesBody extends StatelessWidget {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       builder: (context, state) {
         if (state.status.isSuccess) {
+          if (state.books.isEmpty) {
+            return const BooksEmptyState(
+              text: "There are any favorites saved yet :(",
+            );
+          }
+
           return ListView.builder(
             itemCount: state.books.length,
             itemBuilder: (context, index) => BookListTile(
@@ -29,7 +35,15 @@ class FavoritesBody extends StatelessWidget {
           );
         }
 
-        return const SizedBox.shrink();
+        if (state.status.isFailure) {
+          return const BooksEmptyState(
+            text: "Failed to retrieve your favorites, try again!",
+          );
+        }
+
+        return const BooksEmptyState(
+          text: "Here you can find your saved favorites!",
+        );
       },
     );
   }

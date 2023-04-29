@@ -1,4 +1,4 @@
-import 'package:books_finder/shared/shared.dart';
+import 'package:books_finder/book_details/book_details.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

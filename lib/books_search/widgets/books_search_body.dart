@@ -7,21 +7,6 @@ class BooksSearchBody extends StatelessWidget {
   /// {@macro books_search_body}
   const BooksSearchBody({super.key});
 
-  void _showToast(
-    BuildContext context,
-    String text, {
-    Color color = Colors.green,
-  }) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(text),
-        duration: const Duration(seconds: 2),
-        backgroundColor: color.withOpacity(0.8),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<FavoritesCubit, FavoritesState>(
@@ -76,19 +61,36 @@ class BooksSearchBody extends StatelessWidget {
                       );
                     }
 
-                    if (state is BooksSearchInitial) {
+                    if (state is BooksSearchIsFailure) {
                       return const BooksEmptyState(
-                        text: "Use the Search bar above to find \nyour favorites books!",
+                        text: "Failed to get books!\n try a different text",
                       );
                     }
 
-                    return const SizedBox.shrink();
+                    return const BooksEmptyState(
+                      text: "Use the Search bar above to find \nyour favorites books!",
+                    );
                   },
                 ),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _showToast(
+    BuildContext context,
+    String text, {
+    Color color = Colors.green,
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+        duration: const Duration(seconds: 2),
+        backgroundColor: color.withOpacity(0.8),
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }
