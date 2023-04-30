@@ -12,14 +12,8 @@ class BooksSearchBody extends StatelessWidget {
     return BlocListener<FavoritesCubit, FavoritesState>(
       listener: (context, state) {
         if (state.status.isFailure) {
-          _showToast(
-            context,
-            "Add to favorites failed!",
-            color: Colors.red,
-          );
-        }
-
-        if (state.status.isSuccess) {
+          _showToast(context, "Add to favorites failed!", color: Colors.red);
+        } else if (state.status.isSuccess) {
           _showToast(context, "Add to favorites succeed!");
         }
       },
@@ -53,23 +47,19 @@ class BooksSearchBody extends StatelessWidget {
                           );
                         },
                       );
-                    }
-
-                    if (state is BooksSearchIsLoading) {
+                    } else if (state is BooksSearchIsLoading) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
-                    }
-
-                    if (state is BooksSearchIsFailure) {
+                    } else if (state is BooksSearchIsFailure) {
                       return const BooksEmptyState(
                         text: "Failed to get books!\n try a different text",
                       );
+                    } else {
+                      return const BooksEmptyState(
+                        text: "Use the Search bar above to find \nyour favorites books!",
+                      );
                     }
-
-                    return const BooksEmptyState(
-                      text: "Use the Search bar above to find \nyour favorites books!",
-                    );
                   },
                 ),
               )

@@ -27,23 +27,19 @@ class FavoritesBody extends StatelessWidget {
               trailAction: () => context.read<FavoritesCubit>().deleteFavorite(state.books[index]),
             ),
           );
-        }
-
-        if (state.status.isLoading) {
+        } else if (state.status.isLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        }
-
-        if (state.status.isFailure) {
+        } else if (state.status.isFailure) {
           return const BooksEmptyState(
             text: "Failed to retrieve your favorites, try again!",
           );
+        } else {
+          return const BooksEmptyState(
+            text: "Here you can find your saved favorites!",
+          );
         }
-
-        return const BooksEmptyState(
-          text: "Here you can find your saved favorites!",
-        );
       },
     );
   }
