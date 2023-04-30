@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:books_finder/shared/shared.dart';
 import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +33,21 @@ class BookDetailsAppBar extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        background: Image.network(
-          book.thumbnail ?? AppConstants.placeholderDetails,
-          fit: BoxFit.cover,
-          color: Colors.black.withOpacity(0.6),
-          colorBlendMode: BlendMode.darken,
-          alignment: Alignment.topCenter,
-        ),
+        background: book.imageCachedPath != null
+            ? Image.file(
+                File(book.imageCachedPath!),
+                fit: BoxFit.cover,
+                color: Colors.black.withOpacity(0.6),
+                colorBlendMode: BlendMode.darken,
+                alignment: Alignment.topCenter,
+              )
+            : Image.network(
+                book.thumbnail ?? AppConstants.placeholderDetails,
+                fit: BoxFit.cover,
+                color: Colors.black.withOpacity(0.6),
+                colorBlendMode: BlendMode.darken,
+                alignment: Alignment.topCenter,
+              ),
       ),
     );
   }

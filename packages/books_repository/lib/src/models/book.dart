@@ -17,6 +17,7 @@ class Book extends Equatable {
     this.publisher = "",
     this.thumbnail,
     this.buyLink,
+    this.imageCachedPath,
   });
 
   final String id;
@@ -29,6 +30,7 @@ class Book extends Equatable {
   final List<String> categories;
   final String? thumbnail;
   final String? buyLink;
+  final String? imageCachedPath;
 
   factory Book.fromApi(api.Book book) => Book(
         id: book.id,
@@ -46,6 +48,33 @@ class Book extends Equatable {
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);
 
+  Book copyWith({
+    String? title,
+    List<String>? authors,
+    List<String>? categories,
+    String? description,
+    int? pageCount,
+    String? publishedDate,
+    String? publisher,
+    String? thumbnail,
+    String? buyLink,
+    String? imageCachedPath,
+  }) {
+    return Book(
+      id: id,
+      title: title ?? this.title,
+      authors: authors ?? this.authors,
+      buyLink: buyLink ?? this.buyLink,
+      categories: categories ?? this.categories,
+      description: description ?? this.description,
+      pageCount: pageCount ?? this.pageCount,
+      publishedDate: publishedDate ?? this.publishedDate,
+      publisher: publisher ?? this.publisher,
+      thumbnail: thumbnail ?? this.thumbnail,
+      imageCachedPath: imageCachedPath ?? this.imageCachedPath,
+    );
+  }
+
   @override
   List<Object?> get props => [
         id,
@@ -58,5 +87,6 @@ class Book extends Equatable {
         publishedDate,
         publisher,
         buyLink,
+        imageCachedPath,
       ];
 }

@@ -9,6 +9,9 @@ environment:
 dependencies:
   books_repository:
     path: ../books_repository
+  http: ^0.13.5
+  path: ^1.8.2
+  path_provider: ^2.0.14
   shared_preferences: ^2.1.0
 
 dev_dependencies:

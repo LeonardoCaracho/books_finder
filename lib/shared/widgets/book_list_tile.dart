@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:books_finder/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:books_finder/shared/shared.dart';
@@ -28,9 +30,13 @@ class BookListTile extends StatelessWidget {
               arguments: book,
             ),
             child: ListTile(
-              leading: Image.network(
-                book.thumbnail ?? AppConstants.placeholderList,
-              ),
+              leading: book.imageCachedPath != null
+                  ? Image.file(
+                      File(book.imageCachedPath!),
+                    )
+                  : Image.network(
+                      book.thumbnail ?? AppConstants.placeholderList,
+                    ),
               title: Text(book.title),
               subtitle: Text(book.authors.join(' · ')),
               trailing: IconButton(
