@@ -1,5 +1,5 @@
+import 'package:books_finder/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:books_finder/book_details/book_details.dart';
 import 'package:books_finder/shared/shared.dart';
 import 'package:books_repository/books_repository.dart';
 
@@ -23,7 +23,10 @@ class BookListTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           GestureDetector(
-            onTap: () => Navigator.of(context).push(BookDetailsPage.route(book)),
+            onTap: () => Navigator.of(context).pushNamed(
+              Routes.bookDetails,
+              arguments: book,
+            ),
             child: ListTile(
               leading: Image.network(
                 book.thumbnail ?? AppConstants.placeholderList,

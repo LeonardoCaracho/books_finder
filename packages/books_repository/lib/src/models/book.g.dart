@@ -8,17 +8,20 @@ part of 'book.dart';
 
 Book _$BookFromJson(Map<String, dynamic> json) => Book(
       id: json['id'] as String,
-      thumbnail: json['thumbnail'] as String,
-      title: json['title'] as String,
-      authors:
-          (json['authors'] as List<dynamic>).map((e) => e as String).toList(),
-      categories: (json['categories'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      description: json['description'] as String,
-      pageCount: json['pageCount'] as int,
-      publishedDate: json['publishedDate'] as String,
-      publisher: json['publisher'] as String,
+      title: json['title'] as String? ?? "",
+      authors: (json['authors'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      categories: (json['categories'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      description: json['description'] as String? ?? "",
+      pageCount: json['pageCount'] as int? ?? 0,
+      publishedDate: json['publishedDate'] as String? ?? "",
+      publisher: json['publisher'] as String? ?? "",
+      thumbnail: json['thumbnail'] as String?,
       buyLink: json['buyLink'] as String?,
     );
 

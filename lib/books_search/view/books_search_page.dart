@@ -1,3 +1,4 @@
+import 'package:books_finder/routes/routes.dart';
 import 'package:books_finder/favorites/favorites.dart';
 import 'package:books_repository/books_repository.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class BooksSearchPage extends StatelessWidget {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () => Navigator.of(context).push(FavoritesPage.route()),
+              onPressed: () => Navigator.of(context).pushNamed(Routes.favorites),
               icon: const Icon(Icons.favorite),
             )
           ],

@@ -46,7 +46,7 @@ class BooksSearchBody extends StatelessWidget {
                           return BookListTile(
                             book: book,
                             trailIcon: const Icon(
-                              Icons.favorite,
+                              Icons.favorite_border_outlined,
                               color: Colors.lightBlue,
                             ),
                             trailAction: () => context.read<FavoritesCubit>().addFavorite(book),

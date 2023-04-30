@@ -8,13 +8,13 @@ part 'book.g.dart';
 class Book extends Equatable {
   Book({
     required this.id,
-    required this.title,
-    required this.authors,
-    required this.categories,
-    required this.description,
-    required this.pageCount,
-    required this.publishedDate,
-    required this.publisher,
+    this.title = "",
+    this.authors = const [],
+    this.categories = const [],
+    this.description = "",
+    this.pageCount = 0,
+    this.publishedDate = "",
+    this.publisher = "",
     this.thumbnail,
     this.buyLink,
   });

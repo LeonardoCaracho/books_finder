@@ -14,7 +14,7 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 $ flutter run --target lib/main.dart
 ```
 
-\*The Books Finder works on iOS and Android.\*
+\*The Books Finder works on iOS and Android.
 
 ---
 

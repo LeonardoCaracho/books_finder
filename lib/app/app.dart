@@ -1,4 +1,5 @@
 import 'package:books_api/books_api.dart';
+import 'package:books_finder/routes/routes_generator.dart';
 import 'package:books_finder/books_search/books_search.dart';
 import 'package:books_repository/books_repository.dart';
 import 'package:books_storage/books_storage.dart';
@@ -38,7 +39,7 @@ class AppView extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BooksSearchPage(),
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
